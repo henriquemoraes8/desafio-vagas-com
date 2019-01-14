@@ -1,14 +1,14 @@
 # README
 
-Esse projeto foi criado como parte to processo de entrevista para VAGAS.com
+Esse projeto foi criado como parte do processo de entrevista para VAGAS.com
 
-##Especificações
+## Especificações
 
 * Ruby: 2.6.0
 * Rails: 5.2.2
 * Db: Postgresql
 
-##Setup
+## Setup
 
 Para inicializar o banco de dados deve-se executar 
 
