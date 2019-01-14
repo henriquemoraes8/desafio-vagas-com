@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  location1: one
+  location2: one
+  distance: 
+
+two:
+  location1: two
+  location2: two
+  distance: 
