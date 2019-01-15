@@ -8,8 +8,11 @@ module V1
       return render json: {success: false, message: "localização inválida"}, :status => 400 if location.nil?
       @job = Job.new(job_params)
       @job.location = location
-      @job.save
-      render 'jobs/show', :status => 200
+      if !@job.save
+        render json: {error: @job.errors}, :status => 400
+      else
+        render 'jobs/show', :status => 200
+      end
     end
 
     def index

@@ -7,12 +7,15 @@ Esse projeto foi criado como parte do processo de entrevista para VAGAS.com
 * Ruby: 2.6.0
 * Rails: 5.2.2
 * Db: Postgresql
+* IDE: RubyMine
 
 ## Setup
 
 Para inicializar o banco de dados deve-se executar 
 
-`rake db:setup`
+`bundle intall`
+
+`rake db:setup db:migrate`
 
 O projeto possui dois arquivos para pre-popular o banco de dados.
 
@@ -65,7 +68,8 @@ Para ver um diagrama do banco de dados atual, favor consultar o arquivo `erd.pdf
 
 ## Endpoints
 
-A maioria dos chamadas são auto explicativas e não requerem muita explicação. Apenas o cálculo do score será elaborado abaixo
+A maioria dos chamadas são auto explicativas. Apenas o cálculo do score será elaborado abaixo. Caso não for providenciada
+as informações corretas, o servidor enviará status 400 com a mensagem de erro do RM
 
 ```cassandraql
                 Prefix Verb          Description                                            URI Pattern                                          Controller#Action
@@ -76,6 +80,9 @@ ranking_v1_vaga_candidaturas GET     Lista candidaturas para uma vaga baseado em
                              POST    Cria um candidato                                      /v1/pessoas(.:format)                                v1/users#create
              v1_candidaturas POST    Cria uma candidatura                                   /v1/candidaturas(.:format)                           v1/applications#create
               v1_candidatura DELETE  Deleta uma candidatura                                 /v1/candidaturas/:id(.:format)                       v1/applications#destroy
+                   v1_locais POST    Cria um local                                          /v1/locais(.:format)                                 v1/locations#create
+                   v1_locais DELETE  Deleta um local                                        /v1/locais/:id(.:format)                             v1/locations#destroy
+                   v1_locais GET     Lista os locais existentes                             /v1/locais(.:format)                                 v1/locations#index
 ```
 
 ## Cálculo do score
@@ -180,6 +187,13 @@ Obviamente ainda temos heurísticas implementadas para cessar o loop assim que l
 assim o processamento do grafo inteiro
 
 
-* How to run the test suite
+### Testes
 
+Para rodar os testes utilizamos `rspec` e `shoulda`. O escopo dos testes se limitam apenas à validação de modelos. Todos os
+arquivos validam campos e associações exceto `spec/models/application_spec.rb`, que possui alguns
+casos de candidato + vaga para testar se o score foi calculado corretamente
+
+Para rodar os testes basta executar
+
+`rspec spec/models`
 

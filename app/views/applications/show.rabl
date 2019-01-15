@@ -1,5 +1,5 @@
 object @application
 attributes :id, :score
 
-child (:pessoa) { extends('users/show') }
-child (:vaga) { extends('jobs/show') }
+node (:pessoa) { partial('users/show', :object => @application.user) }
+node (:vaga) { partial('jobs/show', :object => @application.job) }

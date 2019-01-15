@@ -4,8 +4,12 @@ module V1
     skip_before_action :verify_authenticity_token
 
     def create
-      @application = Application.create(job_id: params[:id_vaga] || params[:job_id], user_id: params[:id_pessoa] || params[:user_id])
-      render 'applications/show', :status => 200
+      @application = Application.new(job_id: params[:id_vaga] || params[:job_id], user_id: params[:id_pessoa] || params[:user_id])
+      if !@application.save
+        render json: {error: @application.errors}, :status => 400
+      else
+        render 'applications/show', :status => 200
+      end
     end
 
     def ranking
@@ -14,8 +18,8 @@ module V1
     end
 
     def destroy
-      Application.destroy(params[:application_id])
-      render json {}, :status => 200
+      Application.destroy(params[:id])
+      render json: {success: true}, :status => 200
     end
 
   end

@@ -10,5 +10,7 @@ Rails.application.routes.draw do
 
     resources :candidaturas, :controller => :applications, only: [:create, :destroy]
 
+    resources :locais, :controller => :locations, only: [:create, :destroy, :index]
+
   end
 end

@@ -8,8 +8,11 @@ module V1
       return render json: {success: false, message: "localização inválida"}, :status => 400 if location.nil?
       @user = User.new(user_params)
       @user.location = location
-      @user.save
-      render 'users/show', :status => 200
+      if !@user.save
+        render json: {error: @user.errors}, :status => 400
+      else
+        render 'users/show', :status => 200
+      end
     end
 
     def index
